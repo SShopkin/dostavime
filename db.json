@@ -1,0 +1,26 @@
+{
+  "transportLtd": [
+    {
+      "id": 1,
+      "username": "Pesho",
+      "pass": "1234"
+    },
+    {
+      "id": 2,
+      "username": "Gosho",
+      "pass": "abv"
+    }
+  ],
+  "user": [
+    {
+      "id": 1,
+      "username": "ivan",
+      "pass": "123"
+    },
+    {
+      "id": 2,
+      "username": "admin",
+      "pass": "admin"
+    }
+  ]
+}
