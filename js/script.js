@@ -41,8 +41,45 @@ $(document).ready(function() {
 	$(".dropdown-menu li").click(function(){
       $("#dropdownHeader").text($(this).text());
       $("#dropdownHeader").val($(this).text());
-   });
+    });
 	
+	function addUser(ENDPOINT){
+		$.ajax(ENDPOINT, {
+			method: "POST",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify({
+				name: $("#userName").val(),
+				password: $("#inputPassword").val(),
+				email: $("#inputEmail").val()
+			}),
+			dataType: "json"
+		})
+	}
+	
+	$("#registrationButton").click(function(){
+		var endpoint;
+		if($("#dropdownHeader").val()==""){
+			alert("Изберете тип");
+		} else if ($("#dropdownHeader").val()=="Транспортна фирма"){
+			endpoint = "http://localhost:3000/transportLtd";
+		} else {
+			endpoint = "http://localhost:3000/user";
+		};
+		if(($("#userName").val()!="")&&($("#inputPassword").val()!="")&&($("#inputEmail").val()!="")){
+			if(($("#inputPassword").val())===($("#retryPassword").val())){
+				if($("#registrationCheck:checked").length){
+					addUser(endpoint);
+				} else {
+					alert("За да продължите трябва да се съгласите с общите условия");
+				}
+			} else {
+				alert("Паролите трябва да съвпадат");
+			}
+		} else {
+			alert("Всички полета са задължителни");
+		}
+		
+	});
 	
 	
 	
