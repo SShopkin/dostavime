@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	"use strict";
-	
+//*******************Enter********************	
 	function allTrasportLtd() {
 		return $.ajax("http://localhost:3000/transportLtd", {
 			method: "GET",
@@ -18,7 +18,7 @@ $(document).ready(function() {
 			for(var i=0;i<response.length;i++){
 				if((response[i].username)==($("#indexName").val())){
 					if((response[i].pass)==($("#indexPassword").val())){
-						window.location.href="main.html";
+						window.location.href="transport.html";
 					}
 				}
 			}
@@ -27,7 +27,7 @@ $(document).ready(function() {
 			for(var i=0;i<response.length;i++){
 				if((response[i].username)==($("#indexName").val())){
 					if((response[i].pass)==($("#indexPassword").val())){
-						window.location.href="main.html";
+						window.location.href="user.html";
 					}
 				}
 			}
@@ -43,13 +43,14 @@ $(document).ready(function() {
       $("#dropdownHeader").val($(this).text());
     });
 	
+//*******************Registration********************
 	function addUser(ENDPOINT){
 		$.ajax(ENDPOINT, {
 			method: "POST",
 			contentType: "application/json; charset=utf-8",
 			data: JSON.stringify({
 				name: $("#userName").val(),
-				password: $("#inputPassword").val(),
+				pass: $("#inputPassword").val(),
 				email: $("#inputEmail").val()
 			}),
 			dataType: "json"
@@ -77,8 +78,7 @@ $(document).ready(function() {
 			}
 		} else {
 			alert("Всички полета са задължителни");
-		}
-		
+		}		
 	});
 	
 	

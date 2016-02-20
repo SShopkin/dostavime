@@ -2,6 +2,11 @@ body {
 	background-color: #effeff;
 }
 
+#content {
+	margin-left:10%;
+	margin-right:10%;
+}
+
 .form-horizontal{
 	margin-top: 3%;
 }

@@ -3,28 +3,14 @@
     {
       "id": 1,
       "username": "Pesho",
-      "pass": "1234"
+      "pass": "1234",
+      "rights": "true"
     },
     {
       "id": 2,
       "username": "Gosho",
-      "pass": "abv"
-    },
-    {
-      "text": "trans",
-      "name": "r",
-      "id": 3
-    },
-    {
-      "text": "trans",
-      "name": "r@abv.bg",
-      "id": 4
-    },
-    {
-      "name": "trans",
-      "passwor": 1234,
-      "email": "abv.",
-      "id": 5
+      "pass": "abv",
+      "rights": "false"
     }
   ],
   "user": [
@@ -35,14 +21,27 @@
     },
     {
       "id": 2,
-      "username": "admin",
-      "pass": "admin"
-    },
+      "username": "toto",
+      "pass": "moto"
+    }
+  ],
+  "administrator": [
     {
-      "name": "js",
-      "password": "js",
-      "email": "js",
-      "id": 3
+      "id": 1,
+      "username": "admin",
+      "pass": "admin",
+      "email": "admin@abv",
+      "name": "Simeon"
+    }
+  ],
+  "notice": [
+    {
+      "id": 1,
+      "header": "20 tona",
+      "text": "kartofi",
+      "price": "100",
+      "creator": "1",
+      "rights": "false"
     }
   ]
 }
