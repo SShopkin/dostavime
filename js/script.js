@@ -83,6 +83,110 @@ $(document).ready(function() {
 	
 	
 	
+//***********************Notice******************************
+
+	function listNotices() {
+		return $.ajax("http://localhost:3000/notice", {
+			method: "GET",
+			dataType: "json"
+		});
+	}
+	
+	function readNotice(noticeId) {
+		return $.ajax(noticeEndpoint(noticeId), {
+			method: "GET",
+			dataType: "json"
+		});
+	}
+
+	function reloadNotices() {
+		return listNotices().then(function(response) {
+			function addNoticeToList(notice) {
+				var newItem = $("<li />");
+				newItem.text(notice.header);
+				newItem.addClass("list-group-item");
+				newItem.attr("data-notice-id", notice.id);
+				$("#noticesList").append(newItem);
+			}
+			$("#noticesList").html("");
+			for(var i=0;i<response.length;i++){
+				addNoticeToList(response[i]);
+			}
+		});
+	}
+	reloadNotices();
+	
+	function noticeEndpoint(noticeId) {
+		return "http://localhost:3000/notice" + "/" + noticeId;
+	}
+	
+	function highlightnoticeInnoticeList(notice) {
+		$("#noticesList li[data-notice-id='"+notice.id+"']").addClass("active");
+	}
+	
+	function shownoticeView(notice) {
+		$("#readPanel .notice-title").text(notice.header);
+		$("#readPanel .notice-description").text(notice.text);
+		$("#readPanel .notice-price").text(notice.price);
+		$("#readPanel .notice-action-remove").attr("data-notice-id", notice.id);
+		$("#readPanel .notice-action-ok").attr("data-notice-id", notice.id);
+		$("#readPanel").show();
+		$("#noticesList li.active").removeClass("active");
+		highlightnoticeInnoticeList(notice);
+	}
+	
+	$(document).on("click", "#noticesList [data-notice-id]", function() {
+		var noticeId = $(this).attr("data-notice-id");
+		readNotice(noticeId).then(shownoticeView);
+	});
+	$(".notice-action-cancel").click(function() {
+		$("#readPanel").hide();
+	});
+	
+//********************Adding notice******************
+	function addNotice(header){
+		$.ajax("http://localhost:3000/notice", {
+			method: "POST",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify({
+				header: header,
+				text: $("#description").val(),
+				price: $("#price").val(),
+				creator: "1",
+				rights: "false"
+			}),
+			dataType: "json"
+		})
+	}
+
+	$("#addNoticeButton").click(function() {
+		var header = $("#title").val()+" От "+$("#from").val()+" За "+$("#to").val()+" Тегло "+$("#weight").val();
+		addNotice(header);		
+		window.location.href="notices.html";
+	});
+	
+//*****************Delete notice**********************
+
+	function deleteNotice(noticeId) {
+		return $.ajax(noticeEndpoint(noticeId), {
+			method: "DELETE",
+			dataType: "json"
+		});
+	}
+
+	$(".notice-action-remove").click(function() {
+		var noticeId = $(this).attr("data-notice-id");
+		deleteNotice(noticeId).then(function() {
+			reloadNotices();
+			$("#readPanel").hide();
+		});
+	});
+	
+	
+	
+	
+	
+	
 	
 	
 	

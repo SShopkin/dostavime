@@ -36,12 +36,20 @@
   ],
   "notice": [
     {
-      "id": 1,
-      "header": "20 tona",
-      "text": "kartofi",
-      "price": "100",
-      "creator": "1",
-      "rights": "false"
+      "header": "Бира От София За Перник Тегло 5 тона",
+      "text": "Описание",
+      "price": "250 лв",
+      "creator": 1,
+      "rights": false,
+      "id": 2
+    },
+    {
+      "header": "Ябълки От Кюстендил За София Тегло 10 тона",
+      "text": "Описание",
+      "price": "400 лв",
+      "creator": 1,
+      "rights": false,
+      "id": 3
     }
   ]
 }

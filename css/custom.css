@@ -3,10 +3,16 @@ body {
 }
 
 #content {
+	background-color: #e8e5f0;
 	margin-left:10%;
 	margin-right:10%;
 }
 
 .form-horizontal{
 	margin-top: 3%;
+}
+
+#aAddNotice{
+	text-align:center;
+	display:block;
 }

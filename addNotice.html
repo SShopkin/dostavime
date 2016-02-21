@@ -1,0 +1,69 @@
+﻿  <doctype html>
+<html>
+	<head>
+		<title> Сайтът за доставки </title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/custom.css">
+	</head>
+	<body>
+		<div class="navbar navbar-default">
+			<ul class="nav navbar-nav">
+				<li><a href="">Начало</a></li>
+				<li><a href="">Профил</a></li>
+				<li class="active"><a href="notices.html">Обяви</a></li>
+				<li><a href="">Настройки</a></li>
+			<ul>
+		</div>
+		<div id="content">
+		
+			<form class="col-md-offset-2 col-md-6 form-horizontal">
+				<div class="form-group">
+				<label for="inputEmail3" class="col-md-4 control-label">Заглавие</label>
+				<div class="col-md-8">
+				  <input type="text" class="form-control" id="title" placeholder="Картофи">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="inputPassword3" class="col-md-4 control-label">От</label>
+				<div class="col-md-8">
+				  <input type="text" class="form-control" id="from" placeholder="Самоков">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="inputPassword3" class="col-md-4 control-label">За</label>
+				<div class="col-md-8">
+				  <input type="text" class="form-control" id="to" placeholder="София">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="inputPassword3" class="col-md-4 control-label">Тегло</label>
+				<div class="col-md-8">
+				  <input type="text" class="form-control" id="weight" placeholder="20 тона">
+				</div>
+			  </div> 
+			  <div class="form-group">
+				<label for="inputPassword3" class="col-md-4 control-label">Цена</label>
+				<div class="col-md-8">
+				  <input type="text" class="form-control" id="price" placeholder="500 лв">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="inputPassword3" class="col-md-4 control-label">Описание</label>
+				<div class="col-md-8">
+				  <textarea class="form-control" id="description" rows="5"></textarea>
+				</div>
+			  </div>			  
+			  <div class="form-group">
+				<div class="col-md-offset-4 col-md-8">
+				  <button type="button" id="addNoticeButton" class="btn btn-default">Добави</button>
+				</div>
+			  </div>		  
+			</form>
+		
+		
+		</div>
+		<script src="js/jquery-2.1.4.js"></script>
+		<script src="js/script.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+	</body>
+</html>
