@@ -18,7 +18,7 @@ $(document).ready(function() {
 			for(var i=0;i<response.length;i++){
 				if((response[i].username)==($("#indexName").val())){
 					if((response[i].pass)==($("#indexPassword").val())){
-						window.location.href="transport.html";
+						window.location.href="transportHome.html";
 					}
 				}
 			}
@@ -27,7 +27,7 @@ $(document).ready(function() {
 			for(var i=0;i<response.length;i++){
 				if((response[i].username)==($("#indexName").val())){
 					if((response[i].pass)==($("#indexPassword").val())){
-						window.location.href="user.html";
+						window.location.href="home.html";
 					}
 				}
 			}
