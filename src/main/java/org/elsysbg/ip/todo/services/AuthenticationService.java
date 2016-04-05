@@ -14,18 +14,18 @@ import org.apache.shiro.mgt.RealmSecurityManager;
 import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.Subject;
-import org.elsysbg.ip.todo.entities.Member;
+import org.elsysbg.ip.todo.entities.NeedTransportUser;
 
 @Singleton
 public class AuthenticationService {
-	private final Provider<MembersService> membersServiceProvider;
+	private final Provider<NeedTransportUsersService> membersServiceProvider;
 
 	@Inject
-	public AuthenticationService(Provider<MembersService> membersServiceProvider) {
+	public AuthenticationService(Provider<NeedTransportUsersService> membersServiceProvider) {
 		this.membersServiceProvider = membersServiceProvider;
 	}
 
-	public Member getCurrentlyLoggedInMember(Subject subject) {
+	public NeedTransportUser getCurrentlyLoggedInMember(Subject subject) {
 		final String username = (String) subject.getPrincipal();
 		if (username == null) {
 			return null;

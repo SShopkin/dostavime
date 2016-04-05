@@ -7,26 +7,26 @@ import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import org.elsysbg.ip.todo.entities.Member;
-import org.elsysbg.ip.todo.entities.Task;
+import org.elsysbg.ip.todo.entities.NeedTransportUser;
+import org.elsysbg.ip.todo.entities.Notice;
 
 @Singleton
-public class TasksService {
+public class NoticesService {
 	private final EntityManagerService entityManagerService;
 	
 	@Inject
-	public TasksService(EntityManagerService entityManagerService) {
+	public NoticesService(EntityManagerService entityManagerService) {
 		this.entityManagerService = entityManagerService;
 	}
 
-	public Task createTask(Task task) {
+	public Notice createTask(Notice notice) {
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
 			em.getTransaction().begin();
-			em.persist(task);
+			em.persist(notice);
 			em.getTransaction().commit();
 			
-			return task;
+			return notice;
 		} finally {
 			if (em.getTransaction().isActive()) {
 				em.getTransaction().rollback();
@@ -34,34 +34,34 @@ public class TasksService {
 			em.close();
 		}
 	}
-	public List<Task> getTasks() {
+	public List<Notice> getTasks() {
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
-			final TypedQuery<Task> query =
-				em.createNamedQuery(Task.QUERY_ALL, Task.class);
+			final TypedQuery<Notice> query =
+				em.createNamedQuery(Notice.QUERY_ALL, Notice.class);
 			return query.getResultList();
 		} finally {
 			em.close();
 		}
 	}
-	public Task getTask(long taskId) {
+	public Notice getTask(long noticeId) {
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
-			final Task result = em.find(Task.class, taskId);
+			final Notice result = em.find(Notice.class, noticeId);
 			if (result == null) {
 				throw new IllegalArgumentException(
-						"No task with id: " + taskId);
+						"No notice with id: " + noticeId);
 			}
 			return result;
 		} finally {
 			em.close();
 		}
 	}
-	public Task updateTask(Task task) {
+	public Notice updateTask(Notice notice) {
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
 			em.getTransaction().begin();
-			final Task result = em.merge(task);
+			final Notice result = em.merge(notice);
 			em.getTransaction().commit();
 			
 			return result;
@@ -72,16 +72,16 @@ public class TasksService {
 			em.close();
 		}
 	}
-	public void deleteTask(long taskId) {
+	public void deleteTask(long noticeId) {
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
 			em.getTransaction().begin();
-			final Task task = em.find(Task.class, taskId);
-			if (task == null) {
+			final Notice notice = em.find(Notice.class, noticeId);
+			if (notice == null) {
 				throw new IllegalArgumentException(
-						"No task with id: " + taskId);
+						"No notice with id: " + noticeId);
 			}
-			em.remove(task);
+			em.remove(notice);
 			
 			em.getTransaction().commit();
 		} finally {
@@ -92,11 +92,11 @@ public class TasksService {
 		}
 	}
 
-	public List<Task> getTasksByAuthor(Member author) {
+	public List<Notice> getTasksByAuthor(NeedTransportUser author) {
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
-			final TypedQuery<Task> query =
-				em.createNamedQuery(Task.QUERY_BY_AUTHOR, Task.class);
+			final TypedQuery<Notice> query =
+				em.createNamedQuery(Notice.QUERY_BY_AUTHOR, Notice.class);
 			query.setParameter("author", author);
 			return query.getResultList();
 		} finally {

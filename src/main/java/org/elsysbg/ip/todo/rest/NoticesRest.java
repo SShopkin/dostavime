@@ -15,59 +15,59 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.subject.Subject;
-import org.elsysbg.ip.todo.entities.Task;
+import org.elsysbg.ip.todo.entities.Notice;
 import org.elsysbg.ip.todo.services.AuthenticationService;
-import org.elsysbg.ip.todo.services.TasksService;
+import org.elsysbg.ip.todo.services.NoticesService;
 import org.secnod.shiro.jaxrs.Auth;
 
-@Path("/tasks")
-public class TasksRest {
-	private final TasksService tasksService;
+@Path("/notices")
+public class NoticesRest {
+	private final NoticesService noticesService;
 	private final AuthenticationService authenticationService;
 
 	@Inject
-	public TasksRest(TasksService tasksService,
+	public NoticesRest(NoticesService noticesService,
 			AuthenticationService authenticationService) {
-		this.tasksService = tasksService;
+		this.noticesService = noticesService;
 		this.authenticationService = authenticationService;
 	}
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public List<Task> getTasks() {
-		return tasksService.getTasks();
+	public List<Notice> getTasks() {
+		return noticesService.getTasks();
 	}
 	
 	@GET
-	@Path("/{taskId}")
+	@Path("/{noticeId}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Task getTask(@PathParam("taskId") long taskId) {
-		return tasksService.getTask(taskId);
+	public Notice getTask(@PathParam("noticeId") long noticeId) {
+		return noticesService.getTask(noticeId);
 	}
 	
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@RequiresAuthentication
-	public Task createTask(@Auth Subject subject, Task task) {
-		task.setAuthor(authenticationService.getCurrentlyLoggedInMember(subject));
-		return tasksService.createTask(task);
+	public Notice createTask(@Auth Subject subject, Notice notice) {
+		notice.setAuthor(authenticationService.getCurrentlyLoggedInMember(subject));
+		return noticesService.createTask(notice);
 	}
 	
 	@DELETE
-	@Path("/{taskId}")
-	public void deleteTask(@PathParam("taskId") long taskId) {
-		tasksService.deleteTask(taskId);
+	@Path("/{noticeId}")
+	public void deleteTask(@PathParam("noticeId") long noticeId) {
+		noticesService.deleteTask(noticeId);
 	}
 	
 	@PUT
-	@Path("/{taskId}")
+	@Path("/{noticeId}")
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Task updateTask(@PathParam("taskId") long taskId, Task task) {
-		final Task fromDb = tasksService.getTask(taskId);
-		fromDb.setTitle(task.getTitle());
-		fromDb.setDescription(task.getDescription());
-		return tasksService.updateTask(fromDb);
+	public Notice updateTask(@PathParam("noticeId") long noticeId, Notice notice) {
+		final Notice fromDb = noticesService.getTask(noticeId);
+		fromDb.setTitle(notice.getTitle());
+		fromDb.setDescription(notice.getDescription());
+		return noticesService.updateTask(fromDb);
 	}
 }

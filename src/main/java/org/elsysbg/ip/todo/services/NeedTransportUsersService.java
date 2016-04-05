@@ -7,29 +7,29 @@ import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import org.elsysbg.ip.todo.entities.Member;
+import org.elsysbg.ip.todo.entities.NeedTransportUser;
 
 @Singleton
-public class MembersService {
+public class NeedTransportUsersService {
 	private final EntityManagerService entityManagerService;
 	private final AuthenticationService authenticationService;
 	
 	@Inject
-	public MembersService(EntityManagerService entityManagerService,
+	public NeedTransportUsersService(EntityManagerService entityManagerService,
 		AuthenticationService authenticationService) {
 		this.entityManagerService = entityManagerService;
 		this.authenticationService = authenticationService;
 	}
 
-	public Member createMember(Member member) {
-		member.setPassword(authenticationService.encryptPassword(member.getPassword()));
+	public NeedTransportUser createMember(NeedTransportUser needTransportUser) {
+		needTransportUser.setPassword(authenticationService.encryptPassword(needTransportUser.getPassword()));
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
 			em.getTransaction().begin();
-			em.persist(member);
+			em.persist(needTransportUser);
 			em.getTransaction().commit();
 			
-			return member;
+			return needTransportUser;
 		} finally {
 			if (em.getTransaction().isActive()) {
 				em.getTransaction().rollback();
@@ -38,24 +38,24 @@ public class MembersService {
 		}
 	}
 
-	public List<Member> getMembers() {
+	public List<NeedTransportUser> getMembers() {
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
-			final TypedQuery<Member> query =
-				em.createNamedQuery(Member.QUERY_ALL, Member.class);
+			final TypedQuery<NeedTransportUser> query =
+				em.createNamedQuery(NeedTransportUser.QUERY_ALL, NeedTransportUser.class);
 			return query.getResultList();
 		} finally {
 			em.close();
 		}
 	}
 	
-	public Member getMember(long memberId) {
+	public NeedTransportUser getMember(long needTransportUserId) {
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
-			final Member result = em.find(Member.class, memberId);
+			final NeedTransportUser result = em.find(NeedTransportUser.class, needTransportUserId);
 			if (result == null) {
 				throw new IllegalArgumentException(
-						"No member with id: " + memberId);
+						"No needTransportUser with id: " + needTransportUserId);
 			}
 			return result;
 		} finally {
@@ -63,11 +63,11 @@ public class MembersService {
 		}
 	}
 
-	public Member getMemberByUsername(String username) {
+	public NeedTransportUser getMemberByUsername(String username) {
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
-			final TypedQuery<Member> query =
-					em.createNamedQuery(Member.QUERY_BY_USERNAME, Member.class);
+			final TypedQuery<NeedTransportUser> query =
+					em.createNamedQuery(NeedTransportUser.QUERY_BY_USERNAME, NeedTransportUser.class);
 			query.setParameter("username", username);
 			return query.getSingleResult();
 		} finally {

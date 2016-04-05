@@ -10,7 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.shiro.subject.Subject;
-import org.elsysbg.ip.todo.entities.Member;
+import org.elsysbg.ip.todo.entities.NeedTransportUser;
 import org.elsysbg.ip.todo.services.AuthenticationService;
 import org.secnod.shiro.jaxrs.Auth;
 
@@ -27,15 +27,15 @@ public class AuthenticationRest {
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Member login(@Auth Subject subject, Member member) {
+	public NeedTransportUser login(@Auth Subject subject, NeedTransportUser needTransportUser) {
 		authenticationService.login(subject,
-				member.getUsername(), member.getPassword());
+				needTransportUser.getUsername(), needTransportUser.getPassword());
 		return authenticationService.getCurrentlyLoggedInMember(subject);
 	}
 	
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Member getCurrentlyLoggedInMember(@Auth Subject subject) {
+	public NeedTransportUser getCurrentlyLoggedInMember(@Auth Subject subject) {
 		return authenticationService.getCurrentlyLoggedInMember(subject);
 	}
 	
