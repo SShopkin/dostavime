@@ -5,8 +5,9 @@
 
 	<persistence-unit name="todolist-jpa">
 		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
-		<class>org.elsysbg.ip.todo.entities.Task</class>
-		<class>org.elsysbg.ip.todo.entities.Member</class>
+		<class>org.elsysbg.ip.todo.entities.Notice</class>
+		<class>org.elsysbg.ip.todo.entities.User</class>
+		<class>org.elsysbg.ip.todo.entities.TransportUser</class>
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>

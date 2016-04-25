@@ -14,13 +14,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @NamedQueries({
 	@NamedQuery(name=Notice.QUERY_ALL,
-		query = "SELECT t from Task t"),
-	@NamedQuery(name=Notice.QUERY_BY_AUTHOR,
-		query = "SELECT t from Task t WHERE t.author=:author")
+		query = "SELECT t from Notice t")
 })
 public class Notice {
 	public static final String QUERY_ALL = "noticesAll";
-	public static final String QUERY_BY_AUTHOR = "noticesByAuthor";
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
@@ -34,7 +31,7 @@ public class Notice {
 
 	@Column(nullable = false)
 	@ManyToOne
-	private NeedTransportUser author;
+	private User author;
 
 	public long getId() {
 		return id;
@@ -60,11 +57,11 @@ public class Notice {
 		this.description = description;
 	}
 
-	public NeedTransportUser getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(NeedTransportUser author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
 

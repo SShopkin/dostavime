@@ -7,31 +7,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @XmlRootElement
 @Entity
 @NamedQueries({
-	@NamedQuery(name=NeedTransportUser.QUERY_ALL,
-		query = "SELECT m from Member m"),
-	@NamedQuery(name=NeedTransportUser.QUERY_BY_USERNAME,
-		query = "SELECT m from Member m WHERE m.username=:username")
-
+	@NamedQuery(name=TransportUser.QUERY_ALL,
+		query = "SELECT m from TransportUser m")
 })
-public class NeedTransportUser {
-	public static final String QUERY_ALL = "needTransportUsersAll";
-	public static final String QUERY_BY_USERNAME = "needTransportUsersByUsername";
+public class TransportUser {
+	public static final String QUERY_ALL = "transportUsersAll";
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private long id;
 	
 	@Column(nullable = false, unique = true)
-	private String username;
+	private String transportUsername;
 
 	// TODO password should be hashed/salted in real world projects
 	@Column(nullable = false)
@@ -45,21 +37,18 @@ public class NeedTransportUser {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getTransportUsername() {
+		return transportUsername;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setTransportUsername(String transportUsername) {
+		this.transportUsername = transportUsername;
 	}
 
-	@XmlTransient
-	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
 
-	@XmlElement
 	public void setPassword(String password) {
 		this.password = password;
 	}

@@ -7,7 +7,6 @@ import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import org.elsysbg.ip.todo.entities.NeedTransportUser;
 import org.elsysbg.ip.todo.entities.Notice;
 
 @Singleton
@@ -19,7 +18,7 @@ public class NoticesService {
 		this.entityManagerService = entityManagerService;
 	}
 
-	public Notice createTask(Notice notice) {
+	public Notice createNotice(Notice notice) {
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -34,7 +33,7 @@ public class NoticesService {
 			em.close();
 		}
 	}
-	public List<Notice> getTasks() {
+	public List<Notice> getNotices() {
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
 			final TypedQuery<Notice> query =
@@ -44,7 +43,7 @@ public class NoticesService {
 			em.close();
 		}
 	}
-	public Notice getTask(long noticeId) {
+	public Notice getNotice(long noticeId) {
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
 			final Notice result = em.find(Notice.class, noticeId);
@@ -57,7 +56,7 @@ public class NoticesService {
 			em.close();
 		}
 	}
-	public Notice updateTask(Notice notice) {
+	public Notice updateNotice(Notice notice) {
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -72,7 +71,7 @@ public class NoticesService {
 			em.close();
 		}
 	}
-	public void deleteTask(long noticeId) {
+	public void deleteNotice(long noticeId) {
 		final EntityManager em = entityManagerService.createEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -92,15 +91,5 @@ public class NoticesService {
 		}
 	}
 
-	public List<Notice> getTasksByAuthor(NeedTransportUser author) {
-		final EntityManager em = entityManagerService.createEntityManager();
-		try {
-			final TypedQuery<Notice> query =
-				em.createNamedQuery(Notice.QUERY_BY_AUTHOR, Notice.class);
-			query.setParameter("author", author);
-			return query.getResultList();
-		} finally {
-			em.close();
-		}
-	}
+	
 }
